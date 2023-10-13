@@ -1,0 +1,146 @@
+<?php
+
+session_start();
+
+include_once 'config/database.php';
+include_once 'app/Post.php';
+include_once 'app/Location.php';
+include_once 'app/Disease.php';
+
+// get database connection
+$database = new Database();
+$db = $database->getConnection();
+
+$post = new Post($db);
+$location = new Location($db);
+$disease = new Disease($db);
+
+$postId = isset($_GET['id']) ? $_GET['id'] : '';
+$post->getOne($postId);
+
+$locations = $location->getLocations();
+$locationNum = $locations->rowCount();
+
+$diseases = $disease->getDiseases();
+$diseaseNum = $diseases->rowCount();
+
+$page_title = "Edit Post";
+
+// POST
+if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
+    date_default_timezone_set('Asia/Manila');
+    $post->id = $_POST['id'];
+    $post->location_id = $_POST["location_id"];
+    $post->disease_id = $_POST["disease_id"];
+    $post->date = $_POST["date"];
+    $post->time = $_POST["time"];
+        
+    // create
+    if($post->update()) {
+        echo "<div class='alert alert-success'>Post was updated.</div>";
+    } else {
+        echo "<div class='alert alert-danger'>Unable to update post.</div>";
+    }
+}
+?>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Admin Dashboard</title>
+
+  <link rel="stylesheet" href="css/table.css">
+
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+  <body>
+    <div class="container">
+Welcome! <a href="logout.php">Logout</a>
+    <h1>Admin</h1>
+        <div class="row">
+            <div class="col col-md-12">
+				<div class="card card-login">
+					<div class="card-header card__header">
+						<h4>Edit Post</h4>
+						<a href="/">Home</a>
+					</div>
+
+					<div class="card-body card__content">
+					<?php if(isset($error)): ?>
+						<h5><?php echo $error; ?></h5>
+					<?php endif; ?>
+						<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+							<input type='hidden' name='operation' value="update" />
+							<input type='hidden' name='id' value="<?= $postId ?>" />
+							<div class="row">
+								<div class="col-md-6 m-auto">
+									<div class="form-group">
+										<label for="location_id">Location</label>
+										<select name="location_id" class='form-control'>
+											<option selected disabled>-- SELECT LOCATION --</option>
+											<?php
+                                                if($locationNum > 0) {
+                                                    while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
+                                                        extract($row);
+                                                        if ($id == $post->location_id) {
+                                                            echo "<option value={$id} selected>{$location}</option>";
+                                                        } else {
+                                                            echo "<option value={$id}>{$location}</option>";
+                                                        }
+                                                    }
+                                                }
+?>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="disease_id">Disease</label>
+										<select name="disease_id" class='form-control'>
+											<option selected disabled>-- SELECT DISEASE --</option>
+											<?php
+        if($diseaseNum > 0) {
+            while($row = $diseases->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
+                if ($id == $post->disease_id) {
+                    echo "<option value={$id} selected>{$disease}</option>";
+                } else {
+                    echo "<option value={$id} >{$disease}</option>";
+                }
+            }
+        }
+?>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="date">Date</label>
+										<input type='text' name='date' class='form-control' value="<?= $post->date ?>" minlength=4 required/>
+									</div>
+
+									<div class="form-group">
+										<label for="time">Time</label>
+										<input type='text' name='time' class='form-control' value="<?= $post->time ?>" minlength=4 required/>
+									</div>
+									
+									<div class="form-group form-group--sm">
+										<div>
+											<button type="submit" class="btn btn-primary">Update Post</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+		<!-- <?php
+        include_once "app/Views/partials/layout_footer.php";
+?>	 -->
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
+
+	
