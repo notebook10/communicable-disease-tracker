@@ -45,9 +45,9 @@ $page_title = "Modify User Posts";
                         <tr>
                             <th>Location</th>
                             <th>Disease</th>
+                            <th>User</th>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>User</th>
                             <th>Action</th>
                         </tr>
                     </thead>
