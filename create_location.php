@@ -57,7 +57,7 @@ if($_POST && isset($_POST["location"])) {
 		<h4>Locations</h4>
 	</div>
 	<div class="card-body card__content">
-		<table>
+		<table class="pure-table w-100">
 			<thead>
 				<tr>
 					<th>Location</th>
@@ -66,16 +66,16 @@ if($_POST && isset($_POST["location"])) {
 			</thead>
 			<tbody>
 				<?php
-					 if($locationNum > 0) {
-						while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
-							extract($row);
-							echo "<tr>";
-							echo "<td>{$location}</td>";
-							echo "<td>". date("Y-m-d h:i:s A", strtotime($created_at)) ."</td>";
-							echo "</tr>";
-						}
-					}
-				?>
+                     if($locationNum > 0) {
+                         while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
+                             extract($row);
+                             echo "<tr>";
+                             echo "<td>{$location}</td>";
+                             echo "<td>". date("Y-m-d h:i:s A", strtotime($created_at)) ."</td>";
+                             echo "</tr>";
+                         }
+                     }
+?>
 			</tbody>
 		</table>
 	</div>

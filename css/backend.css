@@ -105,6 +105,30 @@ body {
 .m-auto {
     margin: auto !important;
 }
-.dashboard-container {
-    margin-top: 5% !important;
+.alert-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #23923d;
+}
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+@media (max-width: 576px){
+    .dashboard-container {
+        margin-top: 15% !important;
+    }
+}
+
+@media (min-width: 576px){
+    .dashboard-container {
+        margin-top: 5% !important;
+    }
+}
+.action-td {
+    display: -webkit-inline-box;
 }

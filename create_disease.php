@@ -57,7 +57,7 @@ if($_POST && isset($_POST["disease"])) {
 		<h4>Diseases</h4>
 	</div>
 	<div class="card-body card__content">
-	<table>
+	<table class="pure-table w-100">
 			<thead>
 				<tr>
 					<th>Disease Name</th>
@@ -66,16 +66,16 @@ if($_POST && isset($_POST["disease"])) {
 			</thead>
 			<tbody>
 				<?php
-					 if($diseaseNum > 0) {
-						while($row = $diseases->fetch(PDO::FETCH_ASSOC)) {
-							extract($row);
-							echo "<tr>";
-							echo "<td>{$disease}</td>";
-							echo "<td>". date("Y-m-d h:i:s A", strtotime($created_at)) ."</td>";
-							echo "</tr>";
-						}
-					}
-				?>
+                     if($diseaseNum > 0) {
+                         while($row = $diseases->fetch(PDO::FETCH_ASSOC)) {
+                             extract($row);
+                             echo "<tr>";
+                             echo "<td>{$disease}</td>";
+                             echo "<td>". date("Y-m-d h:i:s A", strtotime($created_at)) ."</td>";
+                             echo "</tr>";
+                         }
+                     }
+?>
 			</tbody>
 		</table>
 	</div>

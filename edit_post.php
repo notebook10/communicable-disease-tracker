@@ -26,22 +26,6 @@ $diseaseNum = $diseases->rowCount();
 
 $page_title = "Edit Post";
 
-// POST
-if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
-    date_default_timezone_set('Asia/Manila');
-    $post->id = $_POST['id'];
-    $post->location_id = $_POST["location_id"];
-    $post->disease_id = $_POST["disease_id"];
-    $post->date = $_POST["date"];
-    $post->time = $_POST["time"];
-        
-    // create
-    if($post->update()) {
-        echo "<div class='alert alert-success'>Post was updated.</div>";
-    } else {
-        echo "<div class='alert alert-danger'>Unable to update post.</div>";
-    }
-}
 ?>
 <html lang="en">
   <head>
@@ -54,6 +38,13 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
 
   <link rel="stylesheet" href="css/backend.css">
   <link rel="stylesheet" href="css/layout.css">
+  <!-- plugins for date and time picker -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </head>
   <body>
     <?php include "layout/header.php" ?>
@@ -67,6 +58,24 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
 					</div>
 
 					<div class="card-body card__content">
+                    <?php
+                        // POST
+                        if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
+                            date_default_timezone_set('Asia/Manila');
+                            $post->id = $_POST['id'];
+                            $post->location_id = $_POST["location_id"];
+                            $post->disease_id = $_POST["disease_id"];
+                            $post->date = $_POST["date"];
+                            $post->time = $_POST["time"];
+                                
+                            // create
+                            if($post->update()) {
+                                echo "<div class='alert alert-success'>Post was successfully updated.</div>";
+                            } else {
+                                echo "<div class='alert alert-danger'>Unable to update post.</div>";
+                            }
+                        }
+?>
 					<?php if(isset($error)): ?>
 						<h5><?php echo $error; ?></h5>
 					<?php endif; ?>
@@ -80,16 +89,16 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
 										<select name="location_id" class='form-control'>
 											<option selected disabled>-- SELECT LOCATION --</option>
 											<?php
-                                                if($locationNum > 0) {
-                                                    while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
-                                                        extract($row);
-                                                        if ($id == $post->location_id) {
-                                                            echo "<option value={$id} selected>{$location}</option>";
-                                                        } else {
-                                                            echo "<option value={$id}>{$location}</option>";
-                                                        }
-                                                    }
-                                                }
+                            if($locationNum > 0) {
+                                while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
+                                    extract($row);
+                                    if ($id == $post->location_id) {
+                                        echo "<option value={$id} selected>{$location}</option>";
+                                    } else {
+                                        echo "<option value={$id}>{$location}</option>";
+                                    }
+                                }
+                            }
 ?>
 										</select>
 									</div>
@@ -115,12 +124,12 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
 
 									<div class="form-group">
 										<label for="date">Date</label>
-										<input type='text' name='date' class='form-control' value="<?= $post->date ?>" minlength=4 required/>
+										<input type='text' name='date' id="datepicker" class='form-control' value="<?= $post->date ?>" minlength=4 required/>
 									</div>
 
 									<div class="form-group">
 										<label for="time">Time</label>
-										<input type='text' name='time' class='form-control' value="<?= $post->time ?>" minlength=4 required/>
+										<input type='text' name='time' id="timepicker" class='form-control' value="<?= $post->time ?>" minlength=4 required/>
 									</div>
 									
 									<div class="form-group form-group--sm">
@@ -142,5 +151,15 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
     </div>
   </body>
 </html>
+
+<script>
+$( function() {
+  $( "#datepicker" ).datepicker({
+    dateFormat: "yy-mm-dd"
+  });
+  
+  $( "#timepicker" ).timepicker();
+} );
+</script>
 
 	

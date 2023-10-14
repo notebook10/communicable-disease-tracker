@@ -21,22 +21,6 @@ $diseaseNum = $diseases->rowCount();
 
 $page_title = "Create Post";
 
-// POST
-if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'create') {
-    date_default_timezone_set('Asia/Manila');
-    $post->location_id = $_POST["location_id"];
-    $post->disease_id = $_POST["disease_id"];
-    $post->date = $_POST["date"];
-    $post->time = $_POST["time"];
-    $post->created_at = date('Y-m-d H:i:s', time());
-        
-    // create
-    if($post->create()) {
-        echo "<div class='alert alert-success'>Post was created.</div>";
-    } else {
-        echo "<div class='alert alert-danger'>Unable to create post.</div>";
-    }
-}
 ?>
 
 	<div class="card style-1">
@@ -45,6 +29,24 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'create') {
 			</div>
 
 			<div class="card-body card__content">
+			<?php
+                // POST
+                if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'create') {
+                    date_default_timezone_set('Asia/Manila');
+                    $post->location_id = $_POST["location_id"];
+                    $post->disease_id = $_POST["disease_id"];
+                    $post->date = $_POST["date"];
+                    $post->time = $_POST["time"];
+                    $post->created_at = date('Y-m-d H:i:s', time());
+                        
+                    // create
+                    if($post->create()) {
+                        echo "<div class='alert alert-success'>Post was successfully created.</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>Unable to create post.</div>";
+                    }
+                }
+?>
 			<?php if(isset($error)): ?>
 				<h5><?php echo $error; ?></h5>
 			<?php endif; ?>
@@ -57,12 +59,12 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'create') {
 								<select name="location_id" class='form-control'>
 									<option selected disabled>-- SELECT LOCATION --</option>
 									<?php
-                                        if($locationNum > 0) {
-                                            while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
-                                                extract($row);
-                                                echo "<option value={$id}>{$location}</option>";
-                                            }
-                                        }
+                            if($locationNum > 0) {
+                                while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
+                                    extract($row);
+                                    echo "<option value={$id}>{$location}</option>";
+                                }
+                            }
 ?>
 								</select>
 							</div>
@@ -84,12 +86,12 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'create') {
 
 							<div class="form-group">
 								<label for="date">Date</label>
-								<input type='text' name='date' class='form-control' minlength=4 required/>
+								<input type='text' name='date' id="datepicker" class='form-control' minlength=4 required/>
 							</div>
 
 							<div class="form-group">
 								<label for="time">Time</label>
-								<input type='text' name='time' class='form-control' minlength=4 required/>
+								<input type='text' name='time' id="timepicker" class='form-control' minlength=4 required/>
 							</div>
 							
 							<div class="form-group form-group--sm">

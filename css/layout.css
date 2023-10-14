@@ -58,7 +58,7 @@ a.logout {
 
 @media (min-width: 768px){
     .container {
-        max-width: 720px;
+      max-width: 900px;
     }
     .col-md-6 {
         flex: 0 0 49%;
@@ -230,5 +230,8 @@ a.logout {
  }
  nav {
     width: fit-content;
+}
+.w-100 {
+  width: 100%;
 }
 

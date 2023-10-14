@@ -40,7 +40,7 @@ $page_title = "Modify User Posts";
             </div>
 
             <div class="card-body card__content">
-                <table class="pure-table">
+                <table class="pure-table w-100">
                     <thead>
                         <tr>
                             <th>Location</th>
@@ -63,9 +63,9 @@ $page_title = "Modify User Posts";
                                         echo "<td>{$username}</td>";
                                         echo "<td>{$date}</td>";
                                         echo "<td>{$time}</td>";
-                                        echo "<td>";
+                                        echo "<td class='action-td'>";
                                         echo "<a class='btn btn-primary' href='edit_post.php?id={$id}'>Edit</a>";
-                                        echo "<form action='delete_post.php' method='POST'>";
+                                        echo "<form class='ml-4' action='delete_post.php' method='POST'>";
                                         echo "<input type='hidden' name='post_id' value='{$id}'>";
                                         echo "<button class='btn btn-danger' type='submit'>Delete</button>";
                                         echo "</form>";
