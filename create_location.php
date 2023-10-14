@@ -8,6 +8,8 @@ $database = new Database();
 $db = $database->getConnection();
 
 $location = new Location($db);
+$locations = $location->getLocations();
+$locationNum = $locations->rowCount();
 
 $page_title = "Create Location";
 
@@ -26,30 +28,55 @@ if($_POST && isset($_POST["location"])) {
 }
 ?>
 
-	<div class="card style-1">
-		<div class="card-header card__header">
-			<h4>Create Location</h4>
-		</div>
-
-		<div class="card-body card__content">
-		<?php if(isset($error)): ?>
-			<h5><?php echo $error; ?></h5>
-		<?php endif; ?>
-			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-				<div class="form-group">
-					<label for="location">Location</label>
-					<input type='text' name='location' class='form-control' minlength=4 required/>
-				</div>
-				
-				<div class="form-group form-group--sm">
-					<div>
-						<button type="submit" class="btn btn-primary mt-3">Add Location</button>
-					</div>
-				</div>
-			</form>
-		</div>
+<div class="card style-1">
+	<div class="card-header card__header">
+		<h4>Create Location</h4>
 	</div>
 
-<!-- <?php
-include_once "app/Views/partials/layout_footer.php";
-?>	 -->
+	<div class="card-body card__content">
+	<?php if(isset($error)): ?>
+		<h5><?php echo $error; ?></h5>
+	<?php endif; ?>
+		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+			<div class="form-group">
+				<label for="location">Location</label>
+				<input type='text' name='location' class='form-control' minlength=4 required/>
+			</div>
+			
+			<div class="form-group form-group--sm">
+				<div>
+					<button type="submit" class="btn btn-primary mt-3">Add Location</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="card style-1">
+	<div class="card-header card__header">
+		<h4>Locations</h4>
+	</div>
+	<div class="card-body card__content">
+		<table>
+			<thead>
+				<tr>
+					<th>Location</th>
+					<th>Created At</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					 if($locationNum > 0) {
+						while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
+							extract($row);
+							echo "<tr>";
+							echo "<td>{$location}</td>";
+							echo "<td>". date("Y-m-d", strtotime($created_at)) ."</td>";
+							echo "</tr>";
+						}
+					}
+				?>
+			</tbody>
+		</table>
+	</div>
+</div>

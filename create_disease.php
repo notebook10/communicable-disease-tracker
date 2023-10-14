@@ -8,6 +8,8 @@ $database = new Database();
 $db = $database->getConnection();
 
 $disease = new Disease($db);
+$diseases = $disease->getDiseases();
+$diseaseNum = $diseases->rowCount();
 
 $page_title = "Create Disease";
 
@@ -26,30 +28,55 @@ if($_POST && isset($_POST["disease"])) {
 }
 ?>
 
-	<div class="card style-1">
-			<div class="card-header card__header">
-				<h4>Create Disease</h4>
-			</div>
+<div class="card style-1">
+	<div class="card-header card__header">
+		<h4>Create Disease</h4>
+	</div>
 
-			<div class="card-body card__content">
-			<?php if(isset($error)): ?>
-				<h5><?php echo $error; ?></h5>
-			<?php endif; ?>
-				<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-					<div class="form-group">
-						<label for="disease">Disease</label>
-						<input type='text' name='disease' class='form-control' minlength=4 required/>
-					</div>
-					
-					<div class="form-group form-group--sm">
-						<div>
-							<button type="submit" class="btn btn-primary mt-3">Add Disease</button>
-						</div>
-					</div>
-				</form>
+	<div class="card-body card__content">
+	<?php if(isset($error)): ?>
+		<h5><?php echo $error; ?></h5>
+	<?php endif; ?>
+		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+			<div class="form-group">
+				<label for="disease">Disease</label>
+				<input type='text' name='disease' class='form-control' minlength=4 required/>
 			</div>
-		</div>
+			
+			<div class="form-group form-group--sm">
+				<div>
+					<button type="submit" class="btn btn-primary mt-3">Add Disease</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 
-<!-- <?php
-include_once "app/Views/partials/layout_footer.php";
-?>	 -->
+<div class="card style-1">
+	<div class="card-header card__header">
+		<h4>Diseases</h4>
+	</div>
+	<div class="card-body card__content">
+	<table>
+			<thead>
+				<tr>
+					<th>Disease Name</th>
+					<th>Created At</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					 if($diseaseNum > 0) {
+						while($row = $diseases->fetch(PDO::FETCH_ASSOC)) {
+							extract($row);
+							echo "<tr>";
+							echo "<td>{$disease}</td>";
+							echo "<td>". date("Y-m-d", strtotime($created_at)) ."</td>";
+							echo "</tr>";
+						}
+					}
+				?>
+			</tbody>
+		</table>
+	</div>
+</div>
