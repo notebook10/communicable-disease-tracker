@@ -75,7 +75,7 @@ $page_title = "Search Post";
 
     <div class="card style-1">
         <div class="card-header card__header">
-            <h4>Search Tracker</h4>
+            <h4>Display Post</h4>
         </div>
 
         <div class="card-body card__content">
