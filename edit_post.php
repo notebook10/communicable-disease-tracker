@@ -52,19 +52,19 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
 
   <link rel="stylesheet" href="css/table.css">
 
-  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <link rel="stylesheet" href="css/backend.css">
   <link rel="stylesheet" href="css/layout.css">
 </head>
   <body>
+    <?php include "layout/header.php" ?>
     <div class="container">
-Welcome! <a href="logout.php">Logout</a>
+Welcome! 
     <h1>Admin</h1>
         <div class="row">
             <div class="col col-md-12">
-				<div class="card card-login">
+				<div class="card style-1">
 					<div class="card-header card__header">
 						<h4>Edit Post</h4>
-						<a href="/">Home</a>
 					</div>
 
 					<div class="card-body card__content">

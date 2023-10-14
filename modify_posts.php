@@ -31,49 +31,54 @@ $page_title = "Modify User Posts";
 
 
     <div class="post">
-      <h1>User Post</h1>
- 
-      <!-- Here pure-table class is used -->
       <?php if(isset($error)): ?>
         <h5><?php echo $error; ?></h5>
         <?php endif; ?>
-        <table class="pure-table">
-            <thead>
-                <tr>
-                    <th>Location</th>
-                    <th>Disease</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>User</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <?php
-                        if($postNum > 0) {
-                            while($row = $posts->fetch(PDO::FETCH_ASSOC)) {
-                                extract($row);
-                                echo "<tr>";
-                                echo "<td>{$location}</td>";
-                                echo "<td>{$disease}</td>";
-                                echo "<td>{$username}</td>";
-                                echo "<td>{$date}</td>";
-                                echo "<td>{$time}</td>";
-                                echo "<td>";
-                                echo "<a href='edit_post.php?id={$id}'>Edit</a>";
-                                echo "<form action='delete_post.php' method='POST'>";
-                                echo "<input type='hidden' name='post_id' value='{$id}'>";
-                                echo "<button type='submit'>Delete</button>";
-                                echo "</form>";
-                                echo "</td>";
-                                echo "</tr>";
-                            }
-                        }
+        <div class="card style-1">
+            <div class="card-header card__header">
+                <h4>Tracker List</h4>
+            </div>
+
+            <div class="card-body card__content">
+                <table class="pure-table">
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Disease</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>User</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php
+                                if($postNum > 0) {
+                                    while($row = $posts->fetch(PDO::FETCH_ASSOC)) {
+                                        extract($row);
+                                        echo "<tr>";
+                                        echo "<td>{$location}</td>";
+                                        echo "<td>{$disease}</td>";
+                                        echo "<td>{$username}</td>";
+                                        echo "<td>{$date}</td>";
+                                        echo "<td>{$time}</td>";
+                                        echo "<td>";
+                                        echo "<a class='btn btn-primary' href='edit_post.php?id={$id}'>Edit</a>";
+                                        echo "<form action='delete_post.php' method='POST'>";
+                                        echo "<input type='hidden' name='post_id' value='{$id}'>";
+                                        echo "<button class='btn btn-danger' type='submit'>Delete</button>";
+                                        echo "</form>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                }
 ?>
-                </tr>
-            </tbody>
-        </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
       
     </div>
 

@@ -13,11 +13,10 @@
     <?php include "layout/header.php" ?>
     <div class="container">
 Welcome! 
-    <h1>Admin</h1>
+    <h1>Locations</h1>
         <div class="row">
-
             <div class="col col-md-12">
-                <?php include "modify_posts.php" ?>
+                <?php include "create_location.php" ?>
             </div>
         </div>
     </div>

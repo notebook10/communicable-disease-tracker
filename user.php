@@ -7,13 +7,13 @@
 
   <link rel="stylesheet" href="css/table.css">
 
-  <!-- <link rel="stylesheet" href="css/style.css"> -->
   <link rel="stylesheet" href="css/layout.css">
+
+  <link rel="stylesheet" href="css/backend.css">
 </head>
   <body>
     <div class="container">
 Welcome! <a href="logout.php">Logout</a>
-    <h1>User</h1>
         <div class="row">
             <div class="col col-md-12">
                 <?php include "search_post.php" ?>
