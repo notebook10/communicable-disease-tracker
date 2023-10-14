@@ -21,12 +21,12 @@ $locationNum = $locations->rowCount();
 
 $page_title = "Search Post";
 
-	
+
 ?>
 
-	<div class="card card-login">
+	<div class="card style-1">
 			<div class="card-header card__header">
-				<h4>Search Post</h4>
+				<h4>Search Tracker</h4>
 			</div>
 
 			<div class="card-body card__content">
@@ -42,13 +42,13 @@ $page_title = "Search Post";
 								<select name="location_id" class='form-control'>
 									<option selected disabled>-- SELECT LOCATION --</option>
 									<?php
-										if($locationNum > 0) {
-											while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
-												extract($row);
-												echo "<option value={$id}>{$location}</option>";
-											}
-										}
-								?>
+                                        if($locationNum > 0) {
+                                            while($row = $locations->fetch(PDO::FETCH_ASSOC)) {
+                                                extract($row);
+                                                echo "<option value={$id}>{$location}</option>";
+                                            }
+                                        }
+?>
 								</select>
 							</div>
 
@@ -75,16 +75,16 @@ $page_title = "Search Post";
 
 <?php
     // POST
-	if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'search'){
+    if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'search') {
         date_default_timezone_set('Asia/Manila');
-		$post->location_id = $_POST["location_id"];
-		$post->date = $_POST["date"];
-		$post->time = $_POST["time"];
-		
-		// search
+        $post->location_id = $_POST["location_id"];
+        $post->date = $_POST["date"];
+        $post->time = $_POST["time"];
+        
+        // search
         $search = $post->search();
         $searchNum = $search->rowCount();
-		if($searchNum > 0){
+        if($searchNum > 0) {
             $table = "";
             $table .= "<table>";
             $table .= "<thead><tr><th>Post ID</th><th>Location</th><th>Time</th><th>Date</th><th>Disease</th><th>User</th></tr></thead>";
@@ -94,23 +94,23 @@ $page_title = "Search Post";
                 extract($row);
                 
                 $table .= "<tr>";
-                    $table .= "<td>{$id}</td>";
-                    $table .= "<td>{$location}</td>";
-                    $table .= "<td>{$time}</td>";
-                    $table .= "<td>{$date}</td>";
-                    $table .= "<td>{$disease}</td>";
-                    $table .= "<td>{$username}</td>";
+                $table .= "<td>{$id}</td>";
+                $table .= "<td>{$location}</td>";
+                $table .= "<td>{$time}</td>";
+                $table .= "<td>{$date}</td>";
+                $table .= "<td>{$disease}</td>";
+                $table .= "<td>{$username}</td>";
                 $table .= "</tr>";
             }
-			$table .= "</tbody>";
+            $table .= "</tbody>";
             $table .= "</table>";
 
             echo $table;
 
-		}else{
-			echo "<div class='alert alert-danger'>No matching data.</div>";
-		}
-	}
+        } else {
+            echo "<div class='alert alert-danger'>No matching data.</div>";
+        }
+    }
 ?>
 
 <!-- <?php

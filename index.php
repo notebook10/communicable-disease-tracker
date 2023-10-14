@@ -48,7 +48,6 @@ if(! isset($_SESSION['email'])) {
     <?php include "admin.php"; ?>
 <?php } else { ?>
     <!-- USER -->
-    <h1>user</h1>
     <?php include "user.php"; ?>
 <?php }
     } ?>

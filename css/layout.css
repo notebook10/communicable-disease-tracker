@@ -31,8 +31,8 @@ a.logout {
     padding-left: 15px;
 }
 .row {
-    display: -ms-flexbox;
-    display: flex;
+    /* display: -ms-flexbox; */
+    /* display: flex; */
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -15px;

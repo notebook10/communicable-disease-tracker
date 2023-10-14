@@ -13,14 +13,17 @@
 </head>
   <body>
     <div class="container">
-Welcome! <a href="logout.php">Logout</a>
+    <a class="logout btn btn-danger" href="logout.php">Logout</a>
+    
+      <div class="dashboard-container">
         <div class="row">
             <div class="col col-md-12">
-                <?php include "search_post.php" ?>
-                <hr />
                 <?php include "create_post.php" ?>
+                <hr />
+                <?php include "search_post.php" ?>
             </div>
         </div>
+      </div>
     </div>
   </body>
 </html>

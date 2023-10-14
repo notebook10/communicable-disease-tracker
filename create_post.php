@@ -39,7 +39,7 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'create') {
 }
 ?>
 
-	<div class="card card-login">
+	<div class="card style-1">
 			<div class="card-header card__header">
 				<h4>Create Post</h4>
 			</div>
@@ -94,7 +94,7 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'create') {
 							
 							<div class="form-group form-group--sm">
 								<div>
-									<button type="submit" class="btn btn-primary mt-3">Add Post</button>
+									<button type="submit" class="btn btn-primary mt-3">Add Tracker</button>
 								</div>
 							</div>
 						</div>

@@ -12,13 +12,13 @@
   <body>
     <?php include "layout/header.php" ?>
     <div class="container">
-Welcome! 
-    <h1>Locations</h1>
+      <div class="dashboard-container">
         <div class="row">
             <div class="col col-md-12">
                 <?php include "create_disease.php" ?>
             </div>
         </div>
+      </div>
     </div>
   </body>
 </html>

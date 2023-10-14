@@ -58,8 +58,7 @@ if($_POST && isset($_POST["location_id"]) && $_POST['operation'] === 'update') {
   <body>
     <?php include "layout/header.php" ?>
     <div class="container">
-Welcome! 
-    <h1>Admin</h1>
+        <div class="dashboard-container">
         <div class="row">
             <div class="col col-md-12">
 				<div class="card style-1">
@@ -137,6 +136,7 @@ Welcome!
 		<!-- <?php
         include_once "app/Views/partials/layout_footer.php";
 ?>	 -->
+                </div>
             </div>
         </div>
     </div>

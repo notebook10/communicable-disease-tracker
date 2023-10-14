@@ -12,12 +12,12 @@
   <body>
     <?php include "layout/header.php" ?>
     <div class="container">
-Welcome! 
-    <h1>Locations</h1>
         <div class="row">
+          <div class="dashboard-container">
             <div class="col col-md-12">
                 <?php include "create_location.php" ?>
             </div>
+          </div>
         </div>
     </div>
   </body>
