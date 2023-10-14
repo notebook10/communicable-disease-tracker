@@ -71,7 +71,7 @@ if($_POST && isset($_POST["disease"])) {
 							extract($row);
 							echo "<tr>";
 							echo "<td>{$disease}</td>";
-							echo "<td>". date("Y-m-d", strtotime($created_at)) ."</td>";
+							echo "<td>". date("Y-m-d h:i:s A", strtotime($created_at)) ."</td>";
 							echo "</tr>";
 						}
 					}
